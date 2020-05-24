@@ -1,5 +1,5 @@
 {
-  "name": "@piros/state",
+  "name": "@piros/status",
   "version": "0.0.1",
   "description": "",
   "main": "./dist/index.js",
@@ -12,19 +12,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Binarysearch/piros-state.git"
+    "url": "git+https://github.com/Binarysearch/piros-status.git"
   },
   "author": "Antonio Ruiz Gutierrez",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Binarysearch/piros-state/issues"
+    "url": "https://github.com/Binarysearch/piros-status/issues"
   },
-  "homepage": "https://github.com/Binarysearch/piros-state#readme",
+  "homepage": "https://github.com/Binarysearch/piros-status#readme",
   "devDependencies": {
     "@types/node": "~8.9.4",
     "ts-loader": "^7.0.0"
   },
   "dependencies": {
+    "@piros/ioc": "0.0.5",
     "@piros/utils": "0.0.1",
     "@types/node": "^13.13.5",
     "rxjs": "^6.5.5",
