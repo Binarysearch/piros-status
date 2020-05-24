@@ -12,8 +12,6 @@ export class AplicationStatusService {
         private statusClient: StatusClient
     ) {
         this.statusClient.getServiceUpdates().subscribe((serviceStatus) => {
-            console.log('AplicationStatusService: status changed');
-            console.log(serviceStatus.replicas);
             const newStatus = this.status.value;
             newStatus.services.set(serviceStatus.name, serviceStatus);
             this.status.next(newStatus);

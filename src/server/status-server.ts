@@ -10,7 +10,7 @@ export class StatusServer {
 
     constructor(port: number) {
         const server: Server = new Server((socket: Socket) => {
-            console.log('StatusServer: Socket connected');
+            console.log(`StatusServer: Socket connected adress: '${socket.remoteAddress}'`);
         
             const sender = new SocketObjectStream(socket);
         
@@ -29,7 +29,6 @@ export class StatusServer {
                     this.broadcastUpdatedStatus(message.serviceName);
                 });
 
-                //enviar estado de todos los servicios a la conexion sender
                 this.sendStatusToReplica(sender);
             });
 
@@ -53,8 +52,6 @@ export class StatusServer {
     }
 
     private broadcastUpdatedStatus(serviceName: string) {
-        console.log('StatusServer: sendUpdatedStatus');
-
         const newStatus = this.getServiceStatusMessage(serviceName);
 
         this.services.forEach((value, key) => {
