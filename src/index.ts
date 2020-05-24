@@ -1,5 +1,5 @@
-import { Server, Socket, AddressInfo } from 'net';
-import { SocketObjectStream } from './app/socket-object-stream';
+import { Server, Socket } from 'net';
+import { SocketObjectStream } from '@piros/utils';
 
 
 const server: Server = new Server((socket: Socket) => {
@@ -7,12 +7,8 @@ const server: Server = new Server((socket: Socket) => {
 
     const sender = new SocketObjectStream(socket);
 
-    let i = 0;
-
     sender.getReceivedMessages().subscribe((message) => {
         console.log('message', message);
-        i++;
-        console.log(i);
     });
 });
 
