@@ -1,6 +1,6 @@
 import { Injectable } from '@piros/ioc';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { AplicationStatus } from '../interface/aplication-status';
+import { AplicationStatus, ReplicaStatus } from '../interface/aplication-status';
 import { StatusClient } from '../status-client/status-client';
 
 @Injectable
@@ -20,5 +20,9 @@ export class AplicationStatusService {
 
     public getStatus(): Observable<AplicationStatus> {
         return this.status.asObservable();
+    }
+
+    public setStatus(status: ReplicaStatus): void {
+        this.statusClient.setStatus(status);
     }
 }

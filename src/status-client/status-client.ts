@@ -3,6 +3,7 @@ import { Socket } from "net";
 import { SocketObjectStream } from "@piros/utils";
 import { Subscription, Subject, Observable } from "rxjs";
 import { AplicationService, ReplicaStatus } from "../interface/aplication-status";
+import { DefaultStatusProvider } from "../service/default-status-provider";
 
 const DEFAULT_SERVICE_NAME = 'DEFAULT_SERVICE_NAME';
 const DEFAULT_SERVER_HOST = 'localhost';
@@ -20,14 +21,14 @@ export class StatusClient {
     private objectStream: SocketObjectStream;
     private objectStreamSubscription: Subscription;
 
-    private status: ReplicaStatus = {
-        host: process.env.POD_IP,
-        replicaData: 'The replicaData...'
-    };
+    private status: ReplicaStatus;
 
     private serviceUpdates: Subject<AplicationService> = new Subject();
 
-    constructor() {
+    constructor(
+        private defaultStatusProvider: DefaultStatusProvider
+    ) {
+        this.status = this.defaultStatusProvider.defaultStatus;
         this.serverHost = process.env.PIROS_STATUS_SERVER_HOST ? process.env.PIROS_STATUS_SERVER_HOST : DEFAULT_SERVER_HOST;
         this.serverPort = process.env.PIROS_STATUS_SERVER_PORT ? <any>(process.env.PIROS_STATUS_SERVER_PORT) : DEFAULT_SERVER_PORT;
         this.reconnectInterval = process.env.PIROS_STATUS_RECONNECT_INTERVAL ? <any>(process.env.PIROS_STATUS_RECONNECT_INTERVAL) : DEFAULT_RECONNECT_INTERVAL;
